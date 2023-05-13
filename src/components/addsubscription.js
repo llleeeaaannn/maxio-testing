@@ -60,8 +60,9 @@ const AddSubscription = () => {
       </div>
 
       <div>
-        <h2>Create Subscription</h2>
-        <form>
+        <form onSubmit={createSubscription}>
+
+          <h2>Create Subscription</h2>
 
           <div>
             <label>First Name:</label>
