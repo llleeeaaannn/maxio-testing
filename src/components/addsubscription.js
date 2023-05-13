@@ -20,7 +20,7 @@ const AddSubscription = () => {
     <div>
 
       <div>
-
+        <button type="button">Use Random Data</button>
       </div>
 
       <div>
@@ -58,7 +58,6 @@ const AddSubscription = () => {
           </div>
 
           <button type="submit">Create Subscription</button>
-          <button type="button">Use Random Data</button>
 
         </form>
       </div>
