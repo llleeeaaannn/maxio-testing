@@ -2,7 +2,7 @@ import styles from '../styles/addsubscription.module.css';
 
 const AddSubscription = () => {
 
-  const [subscriptionData, setSubscriptionData] = useState({
+  const [form, setForm] = useState({
     product_handle: 'membership',
     first_name: '',
     last_name: '',
@@ -11,6 +11,10 @@ const AddSubscription = () => {
     expiration_month: '',
     expiration_year: '',
   });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
     <div>
