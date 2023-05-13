@@ -58,6 +58,7 @@ const AddSubscription = () => {
           </div>
 
           <button type="submit">Create Subscription</button>
+          <button type="button">Use Random Data</button>
 
         </form>
       </div>
