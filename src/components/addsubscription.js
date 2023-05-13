@@ -16,6 +16,42 @@ const AddSubscription = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const createSubscription = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      subscription: {
+        product_handle: form.product_handle,
+        customer_attributes: {
+          first_name: form.first_name,
+          last_name: form.last_name,
+          email: form.email,
+        },
+        credit_card_attributes: {
+          full_number: form.full_number,
+          expiration_month: form.expiration_month,
+          expiration_year: form.expiration_year,
+        },
+      },
+    };
+
+    try {
+      const response = await fetch('https:///frank-test.chargify.com/subscriptions.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Basic ' + btoa('7ctFDGmlwi7j4ozwfGnnZIstPydLKTuBVKTfv3zgGA:x'),
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div>
 
