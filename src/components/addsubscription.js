@@ -2,7 +2,15 @@ import styles from '../styles/addsubscription.module.css';
 
 const AddSubscription = () => {
 
-  const [subscriptionData, setSubscriptionData] = useState('')
+  const [subscriptionData, setSubscriptionData] = useState({
+    product_handle: 'membership',
+    first_name: '',
+    last_name: '',
+    email: '',
+    full_number: '',
+    expiration_month: '',
+    expiration_year: '',
+  });
 
   return (
     <div>
