@@ -37,17 +37,22 @@ const AddSubscription = () => {
     };
 
     try {
-      const response = await fetch('https:///frank-test.chargify.com/subscriptions.json', {
+      const response = await fetch('http://localhost:3001/createsubscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Basic ' + btoa('7ctFDGmlwi7j4ozwfGnnZIstPydLKTuBVKTfv3zgGA:x'),
         },
         body: JSON.stringify(formData),
       });
-
+  
       const responseData = await response.json();
-      console.log(responseData);
+  
+      if (response.ok) {
+        console.log(responseData.message);
+        console.log(responseData.data);
+      } else {
+        throw new Error(responseData.error);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
