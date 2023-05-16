@@ -37,7 +37,7 @@ const CreateSubscription = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/createsubscription', {
+      const response = await fetch('http://localhost:3001/createsubscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,10 +60,6 @@ const CreateSubscription = () => {
 
   return (
     <div>
-
-      <div>
-        <button type="button">Use Random Data</button>
-      </div>
 
       <div>
         <form onSubmit={createSubscription}>
