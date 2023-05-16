@@ -1,7 +1,7 @@
 // import styles from '../styles/addsubscription.module.css';
 import { useState } from 'react';
 
-const AddSubscription = () => {
+const CreateSubscription = () => {
 
   const [form, setForm] = useState({
     product_handle: 'membership',
@@ -37,16 +37,16 @@ const AddSubscription = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/createsubscription', {
+      const response = await fetch('http://localhost:5000/createsubscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         console.log(responseData.message);
         console.log(responseData.data);
@@ -108,4 +108,4 @@ const AddSubscription = () => {
   )
 }
 
-export default AddSubscription;
+export default CreateSubscription;

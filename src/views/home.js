@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../App';
-import AddSubscription from '../components/addsubscription';
+import CreateSubscription from '../components/createsubscription';
+import CancelSubscription from '../components/cancelsubscription';
 
 const Home = () => {
 
@@ -9,7 +10,11 @@ const Home = () => {
   return (
     <div>
 
-      <AddSubscription />
+      <CreateSubscription />
+
+      <br />
+
+      <CancelSubscription />
 
     </div>
   )
