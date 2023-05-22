@@ -5,14 +5,10 @@ import CancelSubscription from '../components/cancelsubscription';
 
 const Home = () => {
 
-  const { random } = useContext(AppContext);
-
   return (
-    <div>
+    <div id="homepage">
 
       <CreateSubscription />
-
-      <br />
 
       <CancelSubscription />
 

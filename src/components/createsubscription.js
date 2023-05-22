@@ -3,8 +3,10 @@ import { useState } from 'react';
 
 const CreateSubscription = () => {
 
+  const [message, setMessage] = useState('');
+
   const [form, setForm] = useState({
-    product_handle: 'membership',
+    product_handle: '',
     first_name: '',
     last_name: '',
     email: '',
@@ -19,6 +21,7 @@ const CreateSubscription = () => {
 
   const createSubscription = async (e) => {
     e.preventDefault();
+    setMessage('');
 
     const formData = {
       subscription: {
@@ -48,23 +51,38 @@ const CreateSubscription = () => {
       const responseData = await response.json();
 
       if (response.ok) {
+        setMessage('Subscription Created');
         console.log(responseData.message);
         console.log(responseData.data);
       } else {
+        setMessage('Subscription Failed to Create');
         throw new Error(responseData.error);
       }
     } catch (error) {
       console.error('Error:', error);
     }
+
+    setTimeout(() => {
+      setMessage('');
+    }, 5000);
   };
 
   return (
-    <div>
+    <div className="add-subscription">
 
       <div>
         <form onSubmit={createSubscription}>
 
           <h2>Create Subscription</h2>
+
+          <div>
+            <label>Product:</label>
+            <select name="product_handle" value={form.product_handle} onChange={updateForm} required>
+              <option value="membership">Membership</option>
+              <option value="season-ticket">Season Ticket</option>
+              <option value="international-membership">International Membership</option>
+            </select>
+          </div>
 
           <div>
             <label>First Name:</label>
@@ -99,6 +117,11 @@ const CreateSubscription = () => {
           <button type="submit">Create Subscription</button>
 
         </form>
+
+        { message &&
+          <p>{message}</p>
+        }
+
       </div>
     </div>
   )

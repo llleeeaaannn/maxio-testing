@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CancelSubscription = () => {
   const [subscriptionId, setSubscriptionId] = useState('');
+  const [subscriptionIds, setSubscriptionIds] = useState([]);
 
-  const handleChange = (e) => {
-    setSubscriptionId(e.target.value);
+  const fetchSubscriptionIds = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/getsubscriptionids');
+      const data = await response.json();
+
+      console.log(data);
+
+      if (Array.isArray(data)) {
+        setSubscriptionIds(data);
+      } else {
+        throw new Error('Invalid response');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    fetchSubscriptionIds();
+  }, []);
+
+  const cancelSubscription = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(`http://localhost:3001/cancelsubscription`, {
@@ -29,13 +47,24 @@ const CancelSubscription = () => {
   };
 
   return (
-    <div>
+    <div className="cancel-subscription">
+
       <h2>Cancel Subscription</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Subscription ID:</label>
-          <input type="text" value={subscriptionId} onChange={handleChange} required />
-        </div>
+
+      <form onSubmit={cancelSubscription}>
+        <label htmlFor="subscriptionId">Subscription ID:</label>
+        <select
+          id="subscriptionId"
+          value={subscriptionId}
+          onChange={(e) => setSubscriptionId(e.target.value)}
+          required
+        >
+          {subscriptionIds.map((id, index) => (
+            <option key={index} value={id}>
+              {id}
+            </option>
+          ))}
+        </select>
         <button type="submit">Cancel Subscription</button>
       </form>
     </div>
